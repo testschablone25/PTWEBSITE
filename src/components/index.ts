@@ -6,3 +6,4 @@ export { Highlight } from "./Highlight";
 export { Section } from "./Section";
 export { ContactForm } from "./ContactForm";
 export { ThemeToggle } from "./theme-toggle";
+export { GoogleMaps } from "./maps";

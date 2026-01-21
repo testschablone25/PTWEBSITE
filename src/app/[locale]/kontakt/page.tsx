@@ -1,6 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
 
-import { ContactForm } from '@/components';
+import { ContactForm, GoogleMaps } from '@/components';
 import { loadMdxFile } from '@/lib/content';
 import { RenderMdx } from '@/lib/mdx';
 
@@ -20,6 +20,18 @@ export default async function KontaktPage({
       <p className="mt-8 text-color-foreground-muted leading-relaxed">{String(doc.frontmatter.description ?? '')}</p>
       <div className="mt-16 space-y-12">
         <RenderMdx source={doc.content} />
+      </div>
+
+      <div className="mt-16">
+        <h2 className="text-2xl font-semibold tracking-tight mb-6">Standorte</h2>
+        <p className="text-color-foreground-muted mb-8">
+          Finden Sie mich an diesen Standorten in Wien für Physiotherapie und Personal Training.
+        </p>
+        <GoogleMaps 
+          simplifiedStyle={true}
+          showControls={false}
+          className="mt-8"
+        />
       </div>
 
       <div className="mt-16">

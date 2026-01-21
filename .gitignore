@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Agent and development files
+.sisyphus/
+dev.log
+server.log
+nul
+pt-website/
+
+# Temporary files
+*.tmp
+*.temp
+*.log

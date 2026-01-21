@@ -1,0 +1,91 @@
+Required Features (select all that apply):
+[x] Online Booking / Appointment Scheduling (short-mid term)
+[x] Client Portal / Login (long term)
+[x] Blog / News Section (short term)
+[x] Enhanced Contact Form (Selection: Physio/PT, checkbox for prescription, auto-reply, calendar integration for scheduling. Initial consultations via selectable 10-min slots)
+[x] Social Media Integration (Instagram/TikTok/YouTube) (Explore Instagram follow button implementation)
+[ ] Other:
+
+Existing Assets:
+New Photos: [ ] Yes [ ] No [ ] Partial
+High-Quality Logo: [ ] SVG [ ] PNG
+Brand Colors/Guidelines: [x] Yes - Background: F4F1EB (Beige), Text: 4E4B45
+Font/Typography Specs: [x] Yes (Proxima Nova)
+
+3) Technical & Maintenance
+Hosting / Domain: jakobpingerpt.at / possibly jakobpinger.pt via redirect from old domain.
+Current Provider:
+Domain Access Available? [ ] Yes [ ] No
+Provider Change Possible? [ ] Yes [ ] No [ ] Doesn't matter
+Post-Launch Website Maintenance By: [x] Me / Us
+
+Additional Requirements:
+CMS for Easy Updates: [x] Yes
+SEO Optimization: [ ] Basic [ ] Advanced [ ] No
+Multi-language: [ ] DE [ ] EN [ ] DE/EN [x] Other:
+
+4) Design Preferences
+Design References (links to liked sites):
+
+
+Background: F4F1EB (Beige), Text: 4E4B45
+
+Text in block/display font style
+
+Specific word highlight/emphasis
+
+Clean, sharp/angular edges preferred over rounded; explore options
+
+Explore "Liquid Glass" UI potential
+
+Large, flowing text elements
+
+Sticky header
+
+In footer: Tile/logos of affiliated organizations, color-adjusted, with connection info.
+
+What specifically do you like about these references?
+
+Brand Feeling (select all that apply):
+[x] Professional/Clinical
+[ ] Motivating/Energetic
+[ ] Modern/Minimal
+[ ] Bold/Athletic
+[x] Warm/Personal
+[ ] Premium/High-End
+[ ] Other:
+
+Existing Branding Rules (if any):
+Maintain Current Colors? [ ] Yes [ ] No [ ] Partially
+Logo Usage (Spacing/Variants):
+Typography Preference:
+
+Previous Notes & Desired Features
+Previous Assessment:
+Modal Carousel is quite nice - it's okay.
+
+Desired Features:
+
+Google Maps integration with locations (simplified monochrome / location marker in green)
+
+Dark Mode toggle
+
+CMS (Content Management System)
+
+Info/Warning Banner (for holidays, patient intake pauses)
+
+Separate sections for Physiotherapy and Personal Training (potentially integrate "About Me" with separate bullet points from CV)
+
+Separate FAQ pages for Physio and PT
+
+Pricing information
+
+"Pathway to Therapy" section (GP referral? Requirements for appointment?)
+
+Patient review submission and display system
+
+Mouse cursor effects/interactions
+
+Dark Mode toggle (reiterated)
+
+English Language toggle/mode
