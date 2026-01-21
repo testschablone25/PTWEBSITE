@@ -29,7 +29,7 @@ export default function HomePage() {
       {/* Hero Section - Sticky with fade/scale on scroll */}
       <HeroSection
         title="Jakob Pinger"
-        subtitle="Physiotherapie & Personal Training – Professionelle Betreuung für Ihre Gesundheit und Fitness in München"
+        subtitle="Physiotherapie & Personal Training – Professionelle Betreuung für Ihre Gesundheit und Fitness in Wien"
       />
 
       {/* Split Screen Section - Overlays the hero as you scroll */}
