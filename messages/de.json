@@ -1,0 +1,26 @@
+{
+  "Common": {
+    "siteName": "Jakob Pinger PT",
+    "nav": {
+      "home": "Start",
+      "physio": "Physiotherapie",
+      "pt": "Personal Training",
+      "about": "Über mich",
+      "prices": "Preise",
+      "faq": "FAQ",
+      "contact": "Kontakt",
+      "blog": "Blog",
+      "reviews": "Rezensionen",
+      "therapyPath": "Pfad zur Therapie",
+      "legal": "Rechtliches"
+    },
+    "locale": {
+      "de": "DE",
+      "en": "EN"
+    }
+  },
+  "Home": {
+    "title": "Physiotherapie & Personal Training",
+    "subtitle": "Klar. Warm. Wirksam."
+  }
+}
