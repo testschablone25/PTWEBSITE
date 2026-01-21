@@ -7,6 +7,7 @@ import { Oswald, DM_Sans } from "next/font/google";
 import { Footer, Header } from "@/components";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { routing } from "@/i18n/routing";
+import { getSiteUrl } from "@/lib/site";
 import "../globals.css";
 import "react-day-picker/style.css";
 
@@ -29,7 +30,56 @@ export const metadata: Metadata = {
     default: "Jakob Pinger PT",
     template: "%s | Jakob Pinger PT",
   },
-  description: "Physiotherapie und Personal Training",
+  description: "Physiotherapie und Personal Training in Wien – Professionelle Behandlung für Ihre Gesundheit und Fitness.",
+  keywords: ["Physiotherapie", "Personal Training", "Wien", "Gesundheit", "Fitness", "Rehabilitation", "Jakob Pinger"],
+  authors: [{ name: "Jakob Pinger" }],
+  creator: "Jakob Pinger",
+  publisher: "Jakob Pinger PT",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "de_AT",
+    url: getSiteUrl(),
+    siteName: "Jakob Pinger PT",
+    title: "Jakob Pinger PT – Physiotherapie & Personal Training",
+    description: "Professionelle Physiotherapie und Personal Training in Wien. Individuelle Betreuung für Ihre Gesundheit und Fitness.",
+    images: [
+      {
+        url: `${getSiteUrl()}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "Jakob Pinger PT – Physiotherapie & Personal Training",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jakob Pinger PT – Physiotherapie & Personal Training",
+    description: "Professionelle Physiotherapie und Personal Training in Wien. Individuelle Betreuung für Ihre Gesundheit und Fitness.",
+    images: [`${getSiteUrl()}/og-image.png`],
+    creator: "@jakobpingerpt",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: `${getSiteUrl()}/site.webmanifest`,
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export function generateStaticParams() {

@@ -6,7 +6,7 @@ export { Highlight } from "./Highlight";
 export { Section } from "./Section";
 export { ContactForm } from "./ContactForm";
 export { ThemeToggle } from "./theme-toggle";
-export { GoogleMaps } from "./maps";
+export { GoogleMaps, LeafletMap } from "./maps";
 export { SocialMediaLinks } from "./SocialMediaLinks";
 export { InstagramFollowButton } from "./InstagramFollowButton";
 export { InfoBanner } from "./InfoBanner";

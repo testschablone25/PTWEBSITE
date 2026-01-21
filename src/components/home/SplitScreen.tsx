@@ -28,10 +28,31 @@ const transition = {
 
 export function SplitScreen({ physioContent, ptContent, onSelect, className }: SplitScreenProps) {
   const [selection, setSelection] = useState<Selection>("none");
+  const [hoverSide, setHoverSide] = useState<Selection>("none");
 
   const handleSelect = (choice: Selection) => {
     setSelection(choice);
     onSelect?.(choice);
+  };
+
+  const handleMouseEnter = (side: Selection) => {
+    if (selection === "none") {
+      setHoverSide(side);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setHoverSide("none");
+  };
+
+  const handleTouchStart = (side: Selection) => {
+    if (selection === "none") {
+      setHoverSide(side);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setHoverSide("none");
   };
 
   const handleReset = () => {
@@ -49,7 +70,7 @@ export function SplitScreen({ physioContent, ptContent, onSelect, className }: S
             exit={{ opacity: 0, x: -20 }}
             transition={transition}
             onClick={handleReset}
-            className="fixed left-6 top-24 z-50 flex items-center gap-2 border-2 border-color-foreground bg-color-background px-4 py-2 text-sm font-medium uppercase tracking-widest text-color-foreground hover:bg-color-foreground hover:text-color-background sm:left-8"
+            className="fixed left-4 top-20 z-50 flex items-center gap-2 border-2 border-color-foreground bg-color-background px-4 py-3 text-sm font-medium uppercase tracking-widest text-color-foreground hover:bg-color-foreground hover:text-color-background min-h-[44px] sm:left-8 sm:top-24 sm:px-4 sm:py-2"
           >
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="square" strokeLinejoin="miter" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -59,14 +80,14 @@ export function SplitScreen({ physioContent, ptContent, onSelect, className }: S
         )}
       </AnimatePresence>
 
-      <div className="flex h-full min-h-screen flex-col md:flex-row">
-        <SplitPane content={physioContent} side="left" isSelected={selection === "physio"} isOtherSelected={selection === "pt"} onSelect={() => handleSelect("physio")} showBooking={true} />
+       <div className="flex h-full min-h-screen flex-col md:flex-row gap-4 md:gap-0">
+         <SplitPane content={physioContent} side="left" isSelected={selection === "physio"} isOtherSelected={selection === "pt"} isHovered={hoverSide === "physio"} isOtherHovered={hoverSide === "pt"} onSelect={() => handleSelect("physio")} onMouseEnter={() => handleMouseEnter("physio")} onMouseLeave={handleMouseLeave} onTouchStart={() => handleTouchStart("physio")} onTouchEnd={handleTouchEnd} showBooking={true} />
         <AnimatePresence>
           {selection === "none" && (
             <motion.div initial={{ opacity: 0, scaleY: 0 }} animate={{ opacity: 1, scaleY: 1 }} exit={{ opacity: 0, scaleY: 0 }} transition={transition} className="hidden md:block w-[2px] bg-color-foreground origin-center" />
           )}
         </AnimatePresence>
-        <SplitPane content={ptContent} side="right" isSelected={selection === "pt"} isOtherSelected={selection === "physio"} onSelect={() => handleSelect("pt")} showBooking={false} />
+         <SplitPane content={ptContent} side="right" isSelected={selection === "pt"} isOtherSelected={selection === "physio"} isHovered={hoverSide === "pt"} isOtherHovered={hoverSide === "physio"} onSelect={() => handleSelect("pt")} onMouseEnter={() => handleMouseEnter("pt")} onMouseLeave={handleMouseLeave} onTouchStart={() => handleTouchStart("pt")} onTouchEnd={handleTouchEnd} showBooking={false} />
       </div>
 
       <AnimatePresence>
@@ -83,13 +104,19 @@ interface SplitPaneProps {
   side: "left" | "right";
   isSelected: boolean;
   isOtherSelected: boolean;
+  isHovered: boolean;
+  isOtherHovered: boolean;
   onSelect: () => void;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
+  onTouchStart?: () => void;
+  onTouchEnd?: () => void;
   showBooking: boolean;
 }
 
-function SplitPane({ content, side, isSelected, isOtherSelected, onSelect, showBooking }: SplitPaneProps) {
+function SplitPane({ content, side, isSelected, isOtherSelected, isHovered, isOtherHovered, onSelect, onMouseEnter, onMouseLeave, onTouchStart, onTouchEnd, showBooking }: SplitPaneProps) {
   const getWidth = () => { if (isSelected) return "100%"; if (isOtherSelected) return "0%"; return "50%"; };
-  const getMobileHeight = () => { if (isSelected) return "100%"; if (isOtherSelected) return "0%"; return "50%"; };
+  const getMobileHeight = () => { if (isSelected) return "100%"; if (isOtherSelected) return "0%"; return "auto"; };
 
   return (
     <motion.div
@@ -97,24 +124,28 @@ function SplitPane({ content, side, isSelected, isOtherSelected, onSelect, showB
       initial={false}
       animate={{ width: getWidth(), height: getMobileHeight() }}
       transition={transition}
-      className={cn("relative flex items-center justify-center overflow-hidden min-h-[50vh] md:min-h-screen", side === "left" ? "bg-color-background" : "bg-color-accent-highlight", !isSelected && !isOtherSelected && "cursor-pointer")}
-      onClick={() => { if (!isSelected && !isOtherSelected) onSelect(); }}
-      role={!isSelected && !isOtherSelected ? "button" : undefined}
-      tabIndex={!isSelected && !isOtherSelected ? 0 : undefined}
-      onKeyDown={(e) => { if (!isSelected && !isOtherSelected && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); onSelect(); } }}
+        className={cn("relative flex items-center justify-center transition-all duration-300 touch-manipulation", !isSelected && !isOtherSelected ? "min-h-0 md:min-h-screen" : "min-h-screen", side === "left" ? "bg-color-background" : "bg-color-accent-highlight", !isSelected && !isOtherSelected && "cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-color-foreground focus-visible:outline-offset-2 active:brightness-95", isOtherSelected ? "overflow-hidden" : "overflow-visible", !isSelected && !isOtherSelected && isOtherHovered && "opacity-80", !isSelected && !isOtherSelected && isHovered && "brightness-105")}
+       onClick={() => { if (!isSelected && !isOtherSelected) onSelect(); }}
+       onMouseEnter={onMouseEnter}
+       onMouseLeave={onMouseLeave}
+       onTouchStart={onTouchStart}
+       onTouchEnd={onTouchEnd}
+       role={!isSelected && !isOtherSelected ? "button" : undefined}
+       tabIndex={!isSelected && !isOtherSelected ? 0 : undefined}
+       onKeyDown={(e) => { if (!isSelected && !isOtherSelected && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); onSelect(); } }}
     >
-      <AnimatePresence mode="wait">
+       <AnimatePresence mode="wait">
         {!isOtherSelected && (
-           <motion.div key={isSelected ? "expanded" : "collapsed"} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className={cn("w-full px-6 py-12 sm:px-8 overflow-y-auto max-h-screen", isSelected ? (showBooking ? "max-w-4xl mx-auto" : "max-w-3xl mx-auto") : "max-w-md")}>
+           <motion.div key={isSelected ? "expanded" : "collapsed"} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className={cn("w-full transition-shadow duration-300", !isSelected && !isOtherSelected ? "px-6 py-6 sm:px-8 md:py-12" : "px-6 py-12 sm:px-8", isSelected ? (showBooking ? "max-w-4xl mx-auto" : "max-w-3xl mx-auto") : "max-w-md", !isSelected && !isOtherSelected && isHovered && "[box-shadow:0_0_12px_2px_rgb(var(--color-accent-rgb)_/_0.3)]")}>
             <motion.h2 layout="position" className={cn("font-bold tracking-tight mb-4", isSelected ? "text-center" : "")}>{content.title}</motion.h2>
-            <motion.p layout="position" className={cn("text-lg text-color-foreground-muted mb-8", isSelected ? "text-center" : "")}>{content.tagline}</motion.p>
-            <div className={cn("space-y-6", isSelected && "mt-12")}>
+            <motion.p layout="position" className={cn("text-lg text-color-foreground-muted mb-8", isSelected ? "text-center" : "", !isSelected && "hidden md:block")}>{content.tagline}</motion.p>
+            <div className={cn("space-y-6", isSelected && "mt-12", !isSelected && "hidden md:block")}>
               {content.paragraphs.map((paragraph, index) => (
                 <motion.p key={index} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ ...transition, delay: isSelected ? 0.2 + index * 0.1 : 0 }} className="text-color-foreground leading-relaxed">{paragraph}</motion.p>
               ))}
             </div>
             {!isSelected && (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="mt-8">
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="mt-8 hidden md:block">
                 <span className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-color-foreground">
                   Mehr erfahren
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="square" strokeLinejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>

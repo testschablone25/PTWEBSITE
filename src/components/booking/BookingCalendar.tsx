@@ -41,10 +41,10 @@ export function BookingCalendar({
 }: BookingCalendarProps) {
   const today = startOfDay(new Date());
   
-  // Disable dates in the past, Sundays, and fully booked days
+  // Disable dates in the past, weekends, and fully booked days
   const disabledDays = [
     { before: today },
-    { dayOfWeek: [0] }, // Sunday disabled
+    { dayOfWeek: [0, 6] }, // Sunday (0) and Saturday (6) disabled
     ...fullyBookedDates.map(date => startOfDay(date)),
   ];
 
@@ -78,7 +78,7 @@ export function BookingCalendar({
     months: cn(defaultClassNames.months),
     month: cn("space-y-4", defaultClassNames.month),
     weekdays: cn(defaultClassNames.weekdays),
-    weekday: cn("text-color-foreground-muted font-normal text-xs uppercase tracking-wider", defaultClassNames.weekday),
+    weekday: cn(defaultClassNames.weekday),
     week: cn(defaultClassNames.week),
     day: cn("p-0", defaultClassNames.day),
     day_button: cn(
@@ -139,7 +139,7 @@ export function BookingCalendar({
       />
 
       {/* Legend */}
-      <div className="mt-6 flex flex-wrap items-center gap-4 text-xs text-color-foreground-muted border-t border-color-border pt-4">
+      <div className="mt-6 flex flex-wrap items-center gap-2 sm:gap-4 text-[11px] sm:text-xs text-color-foreground-muted border-t border-color-border pt-4">
         <div className="flex items-center gap-2">
           <div className="h-4 w-4 border-2 border-color-border bg-color-accent-highlight" />
           <span>Verfügbar</span>

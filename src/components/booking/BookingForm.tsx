@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -53,7 +53,7 @@ export function BookingForm({ selectedDate, selectedTime, onSubmit, onBack, clas
         <div className="mb-4"><svg className="mx-auto h-12 w-12 text-color-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="square" strokeLinejoin="miter" d="M5 13l4 4L19 7" /></svg></div>
         <h3 className="text-xl font-semibold mb-2">Termin angefragt</h3>
         <p className="text-color-foreground-muted mb-4">Vielen Dank! Ihre Terminanfrage für den {formattedDate} um {selectedTime} Uhr wurde gesendet. Ich melde mich zeitnah bei Ihnen.</p>
-        <button type="button" onClick={onBack} className="border-2 border-color-foreground px-6 py-3 font-medium uppercase tracking-widest text-sm hover:bg-color-foreground hover:text-color-background transition-colors">Neuen Termin buchen</button>
+         <button type="button" onClick={onBack} className="border-2 border-color-foreground px-6 py-3 font-medium uppercase tracking-widest text-sm hover:bg-color-foreground hover:text-color-background focus-visible:outline focus-visible:outline-2 focus-visible:outline-color-foreground focus-visible:outline-offset-2 transition-colors">Neuen Termin buchen</button>
       </motion.div>
     );
   }
@@ -64,7 +64,7 @@ export function BookingForm({ selectedDate, selectedTime, onSubmit, onBack, clas
         <p className="text-sm uppercase tracking-wider text-color-foreground-muted mb-1">Ihr Termin</p>
         <p className="font-semibold">{formattedDate}</p>
         <p className="text-color-foreground-muted">{selectedTime} Uhr (1 Stunde)</p>
-        <button type="button" onClick={onBack} className="mt-2 text-sm underline text-color-foreground-muted hover:text-color-foreground">Anderen Termin wählen</button>
+         <button type="button" onClick={onBack} className="mt-2 text-sm underline text-color-foreground-muted hover:text-color-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-color-foreground focus-visible:outline-offset-2">Anderen Termin wählen</button>
       </div>
       <h3 className="text-xl font-semibold tracking-tight">Ihre Kontaktdaten</h3>
       <div style={{ display: "none" }}><label>Website<input name="website" type="text" autoComplete="off" tabIndex={-1} /></label></div>
@@ -95,7 +95,7 @@ export function BookingForm({ selectedDate, selectedTime, onSubmit, onBack, clas
         <label htmlFor="comment" className="text-sm uppercase tracking-wider text-color-foreground-muted font-medium block">Zusätzliche Informationen / Anmerkungen</label>
         <textarea name="comment" id="comment" rows={4} placeholder="z.B. Beschwerden, besondere Wünsche, etc." className="w-full border border-color-border bg-color-background-elevated px-4 py-3 text-color-foreground placeholder:text-color-foreground-muted hover:border-color-accent focus:border-color-foreground outline-none transition-colors resize-none" />
       </div>
-      <button type="submit" disabled={status === "loading"} className="w-full bg-color-foreground px-6 py-4 font-medium text-color-background hover:bg-color-accent active:bg-color-accent disabled:opacity-50 disabled:cursor-not-allowed outline-none transition-colors tracking-tight text-sm uppercase">{status === "loading" ? "Wird gesendet..." : "Termin anfragen"}</button>
+      <button type="submit" disabled={status === "loading"} className="w-full bg-color-foreground px-6 py-4 font-medium text-color-background hover:bg-color-accent active:bg-color-accent disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-color-foreground focus-visible:outline-offset-2 transition-colors tracking-tight text-sm uppercase">{status === "loading" ? "Wird gesendet..." : "Termin anfragen"}</button>
     </motion.form>
   );
 }

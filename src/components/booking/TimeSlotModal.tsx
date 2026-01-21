@@ -76,7 +76,7 @@ export function TimeSlotModal({
                   </div>
                   <button
                     onClick={onClose}
-                    className="p-2 hover:bg-color-accent-highlight transition-colors -mr-2 -mt-2"
+                    className="p-2 hover:bg-color-accent-highlight transition-colors -mr-2 -mt-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
                     aria-label="Schließen"
                   >
                     <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -93,17 +93,17 @@ export function TimeSlotModal({
                     Keine verfügbaren Termine an diesem Tag.
                   </p>
                 ) : (
-                  <div className="grid grid-cols-2 gap-3">
+                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {availableSlots.map((slot) => (
                       <button
                         key={slot}
                         onClick={() => onSelectTime(slot)}
-                        className={cn(
-                          "border-2 border-color-border px-4 py-4 text-center font-medium",
-                          "hover:border-color-foreground hover:bg-color-accent-highlight",
-                          "focus:border-color-foreground focus:bg-color-accent-highlight",
-                          "transition-colors outline-none"
-                        )}
+                         className={cn(
+                           "border-2 border-color-border px-4 py-4 text-center font-medium min-h-[52px]",
+                           "hover:border-color-foreground hover:bg-color-accent-highlight",
+                           "focus:border-color-foreground focus:bg-color-accent-highlight",
+                           "transition-colors outline-none"
+                         )}
                       >
                         <span className="text-lg">{slot}</span>
                         <span className="block text-xs text-color-foreground-muted mt-1">1 Stunde</span>

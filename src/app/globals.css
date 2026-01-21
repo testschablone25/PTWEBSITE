@@ -447,12 +447,17 @@ select:focus-visible {
 
 /* Base liquid glass effect - combines transparency and blur */
 .liquid-glass {
-  background: rgba(var(--glass-bg-rgb, 244 241 235), 0.85);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(var(--color-foreground-rgb, 78 75 69), 0.12);
+  background: rgb(var(--glass-bg-rgb, 244 241 235) / 0.92);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgb(var(--color-foreground-rgb, 78 75 69) / 0.4);
   position: relative;
   overflow: hidden;
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+  transition: all var(--duration-base) var(--ease-smooth);
 }
 
 /* Square edges variant (for brutalist design) */
@@ -460,41 +465,56 @@ select:focus-visible {
   border-radius: 0;
 }
 
-/* Subtle inner shine effect */
+/* Enhanced inner shine effect */
 .liquid-glass::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 1px;
+  height: 3px;
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.4) 20%,
-    rgba(255, 255, 255, 0.4) 80%,
+    rgba(255, 255, 255, 0.95) 20%,
+    rgba(255, 255, 255, 0.95) 80%,
     transparent
   );
   z-index: 1;
+  filter: blur(0.5px);
 }
 
 /* Liquid glass with color variants */
 .liquid-glass.accent {
-  background: rgba(var(--color-accent-rgb, 199 178 153), 0.15);
-  border-color: rgba(var(--color-accent-rgb, 199 178 153), 0.3);
+  background: rgb(var(--color-accent-rgb, 199 178 153) / 0.35);
+  border-color: rgb(var(--color-accent-rgb, 199 178 153) / 0.7);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05);
 }
 
 .liquid-glass.highlight {
-  background: rgba(var(--color-accent-highlight-rgb, 240 230 216), 0.2);
-  border-color: rgba(var(--color-border-rgb, 212 208 202), 0.4);
+  background: rgb(var(--color-accent-highlight-rgb, 240 230 216) / 0.4);
+  border-color: rgb(var(--color-border-rgb, 212 208 202) / 0.8);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
 }
 
 /* Liquid glass hover effect */
 .liquid-glass.hoverable:hover {
-  background: rgba(var(--glass-bg-rgb, 244 241 235), 0.92);
-  backdrop-filter: blur(16px) saturate(200%);
-  -webkit-backdrop-filter: blur(16px) saturate(200%);
-  border-color: rgba(var(--color-foreground-rgb, 78 75 69), 0.2);
+   background: rgb(var(--glass-bg-rgb, 244 241 235) / 0.98);
+  -webkit-backdrop-filter: blur(28px);
+  backdrop-filter: blur(28px);
+  border-color: rgb(var(--color-foreground-rgb, 78 75 69) / 0.6);
+  box-shadow: 
+    0 12px 32px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+  transition: all var(--duration-base) var(--ease-smooth);
 }
 
 /* Liquid glass text for headings */
@@ -502,13 +522,15 @@ select:focus-visible {
   background: linear-gradient(
     135deg,
     var(--color-foreground) 0%,
-    var(--color-foreground-muted) 50%,
+    var(--color-accent) 40%,
+    var(--color-foreground-muted) 70%,
     var(--color-foreground) 100%
   );
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 200% 200%;
+  font-weight: 700;
 }
 
 /* Animated liquid glass text */
@@ -529,9 +551,12 @@ select:focus-visible {
 .border-liquid {
   position: relative;
   border: 2px solid transparent;
+  background: rgb(var(--glass-bg-rgb, 244 241 235) / 0.95);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
-.border-liquid::after {
+.border-liquid::before {
   content: "";
   position: absolute;
   top: -2px;
@@ -542,41 +567,77 @@ select:focus-visible {
     90deg,
     var(--color-accent),
     var(--color-accent-highlight),
+    var(--color-accent),
+    var(--color-accent-highlight),
     var(--color-accent)
   );
-  background-size: 200% 100%;
+  background-size: 300% 100%;
   z-index: -1;
   animation: border-flow 3s linear infinite;
+  opacity: 1;
+  filter: saturate(1.2);
+}
+
+.border-liquid::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid transparent;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shine-flow 2.5s ease-in-out infinite;
+  pointer-events: none;
 }
 
 @keyframes border-flow {
   0% {
-    background-position: 200% 0;
+    background-position: 300% 0;
   }
   100% {
+    background-position: -300% 0;
+  }
+}
+
+@keyframes shine-flow {
+  0%, 100% {
     background-position: -200% 0;
+    opacity: 0.4;
+  }
+  50% {
+    background-position: 200% 0;
+    opacity: 0.8;
   }
 }
 
 /* Liquid glass card with floating effect */
 .liquid-card {
-  background: rgba(var(--glass-bg-rgb, 244 241 235), 0.8);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(var(--color-border-rgb, 212 208 202), 0.3);
+  background: rgb(var(--glass-bg-rgb, 244 241 235) / 0.9);
+  -webkit-backdrop-filter: blur(28px);
+  backdrop-filter: blur(28px);
+  border: 2px solid rgb(var(--color-border-rgb, 212 208 202) / 0.5);
   box-shadow: 
-    0 4px 20px rgba(0, 0, 0, 0.05),
-    0 1px 3px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 2px 6px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05);
   transition: all var(--duration-base) var(--ease-smooth);
 }
 
 .liquid-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
   box-shadow: 
-    0 8px 30px rgba(0, 0, 0, 0.08),
-    0 3px 6px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    0 16px 48px rgba(0, 0, 0, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.08);
 }
 
 /* Responsive adjustments for reduced motion */
@@ -634,59 +695,83 @@ body .rdp-root {
 .rdp-root .rdp-month_grid {
   width: 100% !important;
   max-width: none !important;
-  display: grid !important;
-  grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+  display: table !important;
+  table-layout: fixed !important;
   border-collapse: collapse;
 }
 
-/* Force table children to participate in grid layout */
-.rdp-root .rdp-month_grid tbody,
-.rdp-root .rdp-month_grid tr {
-  display: contents !important;
+/* Ensure table cells have equal width */
+.rdp-root .rdp-month_grid th,
+.rdp-root .rdp-month_grid td {
+  width: 20% !important; /* 100% / 5 days = 20% each */
+  text-align: center;
 }
 
-/* Make table cells behave as grid items */
-.rdp-root .rdp-month_grid .rdp-day {
-  display: block !important;
-  width: 100% !important;
-  padding: 0 !important;
-  margin: 0 !important;
+/* Ensure proper table structure */
+.rdp-root .rdp-month_grid thead,
+.rdp-root .rdp-month_grid tbody {
+  display: table-row-group !important;
 }
 
 /* Weekday headers - brutalist style */
 .rdp-weekdays {
-  /* display: flex; */ /* Removed to preserve default grid layout */
+  display: table-row !important;
   width: 100%;
   border-bottom: 2px solid var(--color-border);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .rdp-weekday {
-  /* flex: 1; */ /* Removed to preserve default grid layout */
+  display: table-cell !important;
+  width: 20% !important;
   text-align: center;
-  padding: 0.5rem 0;
+  padding: 0.5rem 0.25rem;
   font-family: var(--font-display-sans), system-ui, sans-serif;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
   color: var(--color-foreground-muted);
-  min-width: 0; /* Allow weekday cell to shrink */
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+/* Responsive adjustments for very small screens */
+@media (max-width: 480px) {
+  .rdp-weekday {
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    min-width: 2rem;
+    padding: 0.5rem 0.125rem;
+  }
+}
+
+/* Hide Saturday (6th) and Sunday (7th) weekday headers */
+.rdp-weekday:nth-child(6),
+.rdp-weekday:nth-child(7) {
+  display: none !important;
 }
 
 /* Week rows */
 .rdp-week {
-  /* display: flex; */ /* Removed to preserve default grid layout */
+  display: table-row !important;
   width: 100%;
+}
+
+/* Hide Saturday (6th) and Sunday (7th) day cells */
+.rdp-day:nth-child(6),
+.rdp-day:nth-child(7) {
+  display: none !important;
 }
 
 /* Day cells */
 .rdp-day {
-  /* flex: 1; */ /* Removed to preserve default grid layout */
-  width: 100% !important;
+  display: table-cell !important;
+  width: 20% !important; /* 100% / 5 days = 20% each */
   padding: 0 !important;
   min-width: 0; /* Allow cell to shrink */
   box-sizing: border-box;
+  vertical-align: middle;
 }
 
 /* Day button - brutalist square design */

@@ -106,7 +106,7 @@ export function ContactForm({ locale }: Props) {
           name="kind"
           id="kind"
           required
-          className="w-full border border-color-border bg-color-background-elevated px-4 py-3 text-color-foreground placeholder:text-color-foreground-muted hover:border-color-accent focus:border-color-foreground outline-none transition-colors appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDEyIDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTIgMkwwIDZMMiAxMCIgc3Ryb2tlPSIjNEU0QjQ1IiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==')] bg-[length:12px_8px] bg-[right_16px_center] bg-no-repeat pr-10"
+           className="w-full border border-color-border bg-color-background-elevated px-4 py-3 text-color-foreground placeholder:text-color-foreground-muted hover:border-color-accent focus:border-color-foreground outline-none transition-colors appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDEyIDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTIgMkwwIDZMMiAxMCIgc3Ryb2tlPSIjNEU0QjQ1IiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==')] bg-[length:12px_8px] bg-[right_16px_center] bg-no-repeat pr-10 min-h-[44px]"
         >
           <option value="physio">{labels.physio}</option>
           <option value="pt">{labels.pt}</option>
@@ -158,11 +158,11 @@ export function ContactForm({ locale }: Props) {
 
       <div className="grid gap-2">
         <span className="text-sm uppercase tracking-wider text-color-foreground-muted font-medium block">{labels.preferredSlots}</span>
-        <div className="grid grid-cols-2 gap-2">
+         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {SLOT_OPTIONS.map((slot) => (
             <label
               key={slot}
-              className="flex items-center gap-3 border border-color-border px-4 py-3 cursor-pointer hover:border-color-accent hover:bg-color-accent-highlight transition-colors outline-none focus:border-color-accent focus:bg-color-accent-highlight rounded-none"
+               className="flex items-center gap-3 border border-color-border px-4 py-3 cursor-pointer hover:border-color-accent hover:bg-color-accent-highlight transition-colors outline-none focus:border-color-accent focus:bg-color-accent-highlight rounded-none min-h-[44px]"
             >
               <input name="preferredSlots" type="checkbox" value={slot} className="h-5 w-5 accent-color-foreground flex-shrink-0" />
               <span className="text-sm text-color-foreground">{slot}</span>
