@@ -12,6 +12,15 @@
   --color-border-soft: rgba(212, 208, 202, 0.5);
   --color-border-faint: rgba(212, 208, 202, 0.3);
 
+  /* RGB versions for Liquid Glass effects */
+  --color-background-rgb: 244 241 235;
+  --color-foreground-rgb: 78 75 69;
+  --color-foreground-muted-rgb: 138 134 128;
+  --color-accent-rgb: 199 178 153;
+  --color-accent-highlight-rgb: 240 230 216;
+  --color-border-rgb: 212 208 202;
+  --glass-bg-rgb: var(--color-background-rgb);
+
   /* Dark Mode Colors (defined as tokens too) */
   --color-dark-background: #1A1A1A;
   --color-dark-background-elevated: #242424;
@@ -149,6 +158,15 @@ div[role="button"]:focus-visible {
     --color-border: var(--color-dark-border);
     --color-border-soft: var(--color-dark-border-soft);
     --color-border-faint: var(--color-dark-border-faint);
+    
+    /* Dark mode RGB values for Liquid Glass */
+    --color-background-rgb: 26 26 26;
+    --color-foreground-rgb: 232 228 222;
+    --color-foreground-muted-rgb: 154 149 141;
+    --color-accent-rgb: 139 115 85;
+    --color-accent-highlight-rgb: 58 52 45;
+    --color-border-rgb: 58 52 45;
+    --glass-bg-rgb: var(--color-background-rgb);
   }
 }
 
@@ -163,6 +181,15 @@ html.dark {
   --color-border: var(--color-dark-border);
   --color-border-soft: var(--color-dark-border-soft);
   --color-border-faint: var(--color-dark-border-faint);
+  
+  /* Dark mode RGB values for Liquid Glass */
+  --color-background-rgb: 26 26 26;
+  --color-foreground-rgb: 232 228 222;
+  --color-foreground-muted-rgb: 154 149 141;
+  --color-accent-rgb: 139 115 85;
+  --color-accent-highlight-rgb: 58 52 45;
+  --color-border-rgb: 58 52 45;
+  --glass-bg-rgb: var(--color-background-rgb);
 }
 
 /* Dark mode scrollbar for .dark class */
@@ -411,6 +438,156 @@ select:focus-visible {
 @media (prefers-reduced-motion: no-preference) {
   .animate-pulse-soft {
     animation: pulse-soft 2s var(--ease-smooth) infinite;
+  }
+}
+
+/* ============================================
+   LIQUID GLASS UI EFFECTS (Experimental)
+   ============================================ */
+
+/* Base liquid glass effect - combines transparency and blur */
+.liquid-glass {
+  background: rgba(var(--glass-bg-rgb, 244 241 235), 0.85);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(var(--color-foreground-rgb, 78 75 69), 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Square edges variant (for brutalist design) */
+.liquid-glass.square {
+  border-radius: 0;
+}
+
+/* Subtle inner shine effect */
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4) 20%,
+    rgba(255, 255, 255, 0.4) 80%,
+    transparent
+  );
+  z-index: 1;
+}
+
+/* Liquid glass with color variants */
+.liquid-glass.accent {
+  background: rgba(var(--color-accent-rgb, 199 178 153), 0.15);
+  border-color: rgba(var(--color-accent-rgb, 199 178 153), 0.3);
+}
+
+.liquid-glass.highlight {
+  background: rgba(var(--color-accent-highlight-rgb, 240 230 216), 0.2);
+  border-color: rgba(var(--color-border-rgb, 212 208 202), 0.4);
+}
+
+/* Liquid glass hover effect */
+.liquid-glass.hoverable:hover {
+  background: rgba(var(--glass-bg-rgb, 244 241 235), 0.92);
+  backdrop-filter: blur(16px) saturate(200%);
+  -webkit-backdrop-filter: blur(16px) saturate(200%);
+  border-color: rgba(var(--color-foreground-rgb, 78 75 69), 0.2);
+}
+
+/* Liquid glass text for headings */
+.text-liquid {
+  background: linear-gradient(
+    135deg,
+    var(--color-foreground) 0%,
+    var(--color-foreground-muted) 50%,
+    var(--color-foreground) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+}
+
+/* Animated liquid glass text */
+.text-liquid.animated {
+  animation: liquid-shift 8s ease-in-out infinite;
+}
+
+@keyframes liquid-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Liquid glass border animation */
+.border-liquid {
+  position: relative;
+  border: 2px solid transparent;
+}
+
+.border-liquid::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    var(--color-accent-highlight),
+    var(--color-accent)
+  );
+  background-size: 200% 100%;
+  z-index: -1;
+  animation: border-flow 3s linear infinite;
+}
+
+@keyframes border-flow {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Liquid glass card with floating effect */
+.liquid-card {
+  background: rgba(var(--glass-bg-rgb, 244 241 235), 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(var(--color-border-rgb, 212 208 202), 0.3);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.05),
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all var(--duration-base) var(--ease-smooth);
+}
+
+.liquid-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.08),
+    0 3px 6px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive adjustments for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .text-liquid.animated,
+  .border-liquid::after {
+    animation: none;
+  }
+  
+  .liquid-card:hover {
+    transform: none;
   }
 }
 

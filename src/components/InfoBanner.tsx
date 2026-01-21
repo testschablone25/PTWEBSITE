@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { clsx } from "clsx";
 
 export type BannerVariant = "info" | "warning" | "success" | "error";
@@ -101,17 +101,14 @@ export function InfoBanner({
   storageKey,
   className = "",
 }: InfoBannerProps) {
-  const [isVisible, setIsVisible] = useState(true);
-
-  // Check localStorage for dismissed state
-  useEffect(() => {
-    if (storageKey) {
+  // Initialize visibility from localStorage if storageKey is provided
+  const [isVisible, setIsVisible] = useState(() => {
+    if (storageKey && typeof window !== "undefined") {
       const dismissed = localStorage.getItem(storageKey);
-      if (dismissed === "true") {
-        setIsVisible(false);
-      }
+      return dismissed !== "true";
     }
-  }, [storageKey]);
+    return true;
+  });
 
   const handleDismiss = () => {
     setIsVisible(false);
